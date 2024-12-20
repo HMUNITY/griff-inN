@@ -13,3 +13,39 @@
     <script src="script.js"></script>
 </body>
 </html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Habit Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Welcome to My Habit Tracker!</h1>
+    <p>This is a simple habit tracker where you can track your daily habits!</p>
+
+    <div class="habit-list">
+        <h2>My Habits</h2>
+        <ul id="habit-list">
+            <!-- Habit items will appear here -->
+        </ul>
+    </div>
+
+    <div class="add-habit">
+        <h2>Add New Habit</h2>
+        <input type="text" id="habit-input" placeholder="Enter a new habit">
+        <button onclick="addHabit()">Add Habit</button>
+    </div>
+
+    <div class="habit-stats">
+        <h2>Statistics</h2>
+        <p id="total-habits">Total Habits: 0</p>
+        <p id="completed-habits">Completed: 0</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
