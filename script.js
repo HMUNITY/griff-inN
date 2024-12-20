@@ -12,14 +12,16 @@ function renderHabits() {
         const li = document.createElement('li');
         li.classList.add('habit-item');
 
-        // Habit item HTML structure with extra punctuation field
+        // Habit item HTML structure with extra punctuation fields
         li.innerHTML = `
             <input type="checkbox" class="habit-checkbox" ${habit.completed ? 'checked' : ''} onclick="toggleCompleted(${index})">
             <span class="habit-name">${habit.name}</span>
-            
+            <span class="habit-date">(${habit.date})</span>
+
             <!-- Extra punctuation/comments section -->
             <div class="habit-comments-container">
-                <textarea class="habit-comments" placeholder="Add a note..." onchange="updateComments(${index}, this.value)">${habit.comments || ''}</textarea>
+                <textarea class="habit-comments" placeholder="Add a note..." onchange="updateComments(${index}, this.value)">${habit.comments.join('\n') || ''}</textarea>
+                <button onclick="addComment(${index})">Add Another Comment</button>
             </div>
         `;
 
@@ -42,8 +44,17 @@ function toggleCompleted(index) {
 
 // Update habit comments (extra punctuation)
 function updateComments(index, newComments) {
-    habitList[index].comments = newComments;
+    habitList[index].comments = newComments.split('\n');
     renderHabits();
+}
+
+// Add a new comment to a habit
+function addComment(index) {
+    const comment = prompt('Enter your extra comment:');
+    if (comment) {
+        habitList[index].comments.push(comment);
+        renderHabits();
+    }
 }
 
 // Add a new habit to the list
@@ -51,11 +62,14 @@ function addHabit() {
     const habitName = habitInput.value.trim();
     if (habitName === '') return;
 
-    // Create a new habit object with an empty comment field
+    const currentDate = new Date().toLocaleDateString();
+
+    // Create a new habit object with an empty comment field and the current date
     const newHabit = {
         name: habitName,
         completed: false,
-        comments: ''
+        comments: [],
+        date: currentDate
     };
 
     // Add the new habit to the habit list
@@ -64,17 +78,4 @@ function addHabit() {
     // Clear the input field and re-render the list
     habitInput.value = '';
     renderHabits();
-}
 
-// Event listener for adding a habit when the user presses Enter
-habitInput.addEventListener('keypress', (event) => {
-    if (event.key === 'Enter') {
-        addHabit();
-    }
-});
-
-// Add habit when button is clicked
-document.getElementById('add-habit-button').addEventListener('click', addHabit);
-
-// Initial render when the page loads
-renderHabits();
