@@ -3,49 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Static Website</title>
+    <title>Habit Tracker</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Welcome to My Static Website!</h1>
-    <p>This is a simple website deployed on Render.</p>
-    <button onclick="changeText()">Click Me</button>
-    <script src="script.js"></script>
-</body>
-</html>
 
+    <!-- Habit Tracker Title -->
+    <header>
+        <h1>Habit Tracker</h1>
+    </header>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Habit Tracker</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1>Welcome to My Habit Tracker!</h1>
-    <p>This is a simple habit tracker where you can track your daily habits!</p>
+    <!-- Habit Statistics Section -->
+    <section id="stats">
+        <div>Total Habits: <span id="total-habits">0</span></div>
+        <div>Completed: <span id="completed-habits">0</span></div>
+    </section>
 
-    <div class="habit-list">
-        <h2>My Habits</h2>
-        <ul id="habit-list">
-            <!-- Habit items will appear here -->
-        </ul>
-    </div>
-
-    <div class="add-habit">
-        <h2>Add New Habit</h2>
-        <input type="text" id="habit-input" placeholder="Enter a new habit">
+    <!-- Add New Habit Section -->
+    <section id="add-habit">
+        <input type="text" id="habit-input" placeholder="Enter new habit">
         <button onclick="addHabit()">Add Habit</button>
-    </div>
+    </section>
 
-    <div class="habit-stats">
-        <h2>Statistics</h2>
-        <p id="total-habits">Total Habits: 0</p>
-        <p id="completed-habits">Completed: 0</p>
-    </div>
+    <!-- Habit List Section -->
+    <section id="habit-list-section">
+        <ul id="habit-list">
+            <!-- Habit items will be dynamically rendered here -->
+        </ul>
+    </section>
 
+    <!-- JavaScript File -->
     <script src="script.js"></script>
 </body>
 </html>
