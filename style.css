@@ -1,8 +1,40 @@
+/* Moving Background (Jungle trees and water) */
+@keyframes moveBackground {
+    0% { background-position: 0 0; }
+    100% { background-position: -2000px 0; }
+}
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f4f8; /* Light blue background */
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    overflow: hidden;
+    background: #3A5A6D; /* Dark Blue */
+    position: relative;
+}
+
+/* Jungle Trees and Water Animation */
+#background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://example.com/jungle-trees.png') repeat-x; /* Replace with actual image URL */
+    background-size: cover;
+    animation: moveBackground 20s linear infinite;
+    z-index: -1;
+}
+
+#trees {
+    position: absolute;
+    top: 60%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://example.com/jungle-vines.png') repeat-x; /* Replace with actual image URL */
+    background-size: contain;
+    animation: moveBackground 30s linear infinite;
 }
 
 #habit-tracker {
@@ -12,12 +44,20 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border: 2px solid #A89F91; /* Brown border */
+    border: 4px solid #A89F91; /* Stronger Brown Border */
+    background-color: #F5F5F5; /* Light Beige */
 }
 
 h1 {
     text-align: center;
-    color: #3A5A6D; /* Dark Blue */
+    color: #2c4f5d; /* Dark Blue */
+    font-size: 2.5em;
+}
+
+h2 {
+    color: #2c4f5d; /* Dark Blue */
+    margin-top: 40px;
+    font-size: 1.8em;
 }
 
 #habit-input-section {
@@ -30,13 +70,13 @@ h1 {
     width: 100%;
     padding: 10px;
     font-size: 16px;
-    border: 1px solid #A89F91; /* Brown border for input */
+    border: 1px solid #A89F91;
     border-radius: 5px;
 }
 
 button {
     padding: 10px 15px;
-    background-color: #3A5A6D; /* Dark Blue */
+    background-color: #3A5A6D; /* Blue */
     color: white;
     border: none;
     border-radius: 5px;
@@ -44,7 +84,7 @@ button {
 }
 
 button:hover {
-    background-color: #2c4f5d; /* Darker Blue */
+    background-color: #2c4f5d;
 }
 
 #habit-list {
@@ -53,24 +93,29 @@ button:hover {
 
 .habit-item {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     margin-bottom: 15px;
     padding: 10px;
-    border: 1px solid #A89F91; /* Brown border */
+    border: 2px solid #A89F91;
     border-radius: 8px;
-    background-color: #FAF9F5; /* Light beige background */
+    background-color: #FAF9F5; /* Beige background */
 }
 
 .habit-checkbox {
     margin-right: 10px;
 }
 
-#habit-comments {
+.habit-comments-container {
     margin-top: 10px;
-    padding: 5px;
-    border: 1px solid #A89F91;
-    border-radius: 5px;
+}
+
+.habit-comments {
     width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #A89F91;
     background-color: #f5f5f5;
 }
 
@@ -81,5 +126,5 @@ button:hover {
 }
 
 #summary p {
-    color: #3A5A6D;
+    color: #2c4f5d;
 }
