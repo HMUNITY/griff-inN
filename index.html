@@ -1,38 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Habit Tracker</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8; /* Light blue background */
+    margin: 0;
+    padding: 20px;
+}
 
-    <!-- Habit Tracker Title -->
-    <header>
-        <h1>Habit Tracker</h1>
-    </header>
+#habit-tracker {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid #A89F91; /* Brown border */
+}
 
-    <!-- Habit Statistics Section -->
-    <section id="stats">
-        <div>Total Habits: <span id="total-habits">0</span></div>
-        <div>Completed: <span id="completed-habits">0</span></div>
-    </section>
+h1 {
+    text-align: center;
+    color: #3A5A6D; /* Dark Blue */
+}
 
-    <!-- Add New Habit Section -->
-    <section id="add-habit">
-        <input type="text" id="habit-input" placeholder="Enter new habit">
-        <button onclick="addHabit()">Add Habit</button>
-    </section>
+#habit-input-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
 
-    <!-- Habit List Section -->
-    <section id="habit-list-section">
-        <ul id="habit-list">
-            <!-- Habit items will be dynamically rendered here -->
-        </ul>
-    </section>
+#habit-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #A89F91; /* Brown border for input */
+    border-radius: 5px;
+}
 
-    <!-- JavaScript File -->
-    <script src="script.js"></script>
-</body>
-</html>
+button {
+    padding: 10px 15px;
+    background-color: #3A5A6D; /* Dark Blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2c4f5d; /* Darker Blue */
+}
+
+#habit-list {
+    margin-top: 20px;
+}
+
+.habit-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #A89F91; /* Brown border */
+    border-radius: 8px;
+    background-color: #FAF9F5; /* Light beige background */
+}
+
+.habit-checkbox {
+    margin-right: 10px;
+}
+
+#habit-comments {
+    margin-top: 10px;
+    padding: 5px;
+    border: 1px solid #A89F91;
+    border-radius: 5px;
+    width: 100%;
+    background-color: #f5f5f5;
+}
+
+#summary {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+}
+
+#summary p {
+    color: #3A5A6D;
+}
