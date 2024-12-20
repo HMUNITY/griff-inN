@@ -1,89 +1,98 @@
-// Initialize habits from localStorage, or create an empty array if none exist
-let habits = JSON.parse(localStorage.getItem('habits')) || [];
-let completedHabits = habits.filter(habit => habit.completed).length; // Track number of completed habits
+// Initialize empty habit list if none exists in localStorage
+let habitList = JSON.parse(localStorage.getItem('habitList')) || [];
+const habitInput = document.getElementById('habit-input');
+const habitListSection = document.getElementById('habit-list');
+const totalHabits = document.getElementById('total-habits');
+const completedHabits = document.getElementById('completed-habits');
+
+// Function to render habits from habitList
+function renderHabits() {
+    habitListSection.innerHTML = ''; // Clear the habit list
+    habitList.forEach((habit, index) => {
+        // Create a new list item for each habit
+        const li = document.createElement('li');
+        li.classList.add('habit-item');
+        
+        li.innerHTML = `
+            <div class="habit-content">
+                <input type="checkbox" class="habit-checkbox" ${habit.completed ? 'checked' : ''} onclick="toggleCompleted(${index})">
+                <span class="habit-name">${habit.name}</span>
+                <input type="number" class="progress-input" value="${habit.progress}" min="0" max="100" onchange="updateProgress(${index}, event)">
+                <span class="progress-text">${habit.progress}%</span>
+                <textarea class="habit-comment" placeholder="Add a comment" oninput="updateComment(${index}, event)">${habit.comment}</textarea>
+            </div>
+        `;
+        
+        habitListSection.appendChild(li);
+    });
+
+    // Update the total and completed habits
+    totalHabits.textContent = habitList.length;
+    completedHabits.textContent = habitList.filter(habit => habit.completed).length;
+    
+    // Save habitList to localStorage
+    localStorage.setItem('habitList', JSON.stringify(habitList));
+}
 
 // Function to add a new habit
 function addHabit() {
-    const habitInput = document.getElementById("habit-input");
     const habitName = habitInput.value.trim();
+    if (habitName === '') return;
 
-    if (habitName) {
-        const habit = {
-            name: habitName,
-            completed: false
-        };
-        habits.push(habit);
-        habitInput.value = ''; // Reset input field after adding habit
-        saveHabits(); // Save updated habits to localStorage
-        renderHabits(); // Re-render the habit list
-    }
+    // Create a new habit object
+    const newHabit = {
+        name: habitName,
+        progress: 0,
+        completed: false,
+        comment: ''
+    };
+
+    // Add the new habit to the habitList array
+    habitList.push(newHabit);
+
+    // Clear input field
+    habitInput.value = '';
+
+    // Re-render the habit list
+    renderHabits();
 }
 
-// Function to render the habit list
-function renderHabits() {
-    const habitList = document.getElementById("habit-list");
-    habitList.innerHTML = ""; // Clear the existing list
+// Function to toggle habit completion
+function toggleCompleted(index) {
+    habitList[index].completed = !habitList[index].completed;
 
-    habits.forEach((habit, index) => {
-        const li = document.createElement("li");
-
-        // Create checkbox for habit completion status
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.checked = habit.completed;
-        checkbox.addEventListener("change", () => toggleCompletion(index));
-
-        // Add habit name
-        const habitText = document.createElement("span");
-        habitText.textContent = habit.name;
-
-        // Create a remove button for each habit
-        const removeButton = document.createElement("button");
-        removeButton.textContent = "Remove";
-        removeButton.addEventListener("click", () => removeHabit(index));
-
-        // Append the checkbox, habit name, and remove button to the list item
-        li.appendChild(checkbox);
-        li.appendChild(habitText);
-        li.appendChild(removeButton);
-        habitList.appendChild(li);
-    });
-
-    // Update statistics (e.g., total habits, completed habits)
-    updateStats();
+    // Re-render the list to reflect the completion status
+    renderHabits();
 }
 
-// Function to toggle the completion of a habit (checkbox)
-function toggleCompletion(index) {
-    habits[index].completed = !habits[index].completed;
-    // Update completed habit count
-    if (habits[index].completed) {
-        completedHabits++;
-    } else {
-        completedHabits--;
-    }
-    saveHabits(); // Save updated habits to localStorage
-    renderHabits(); // Re-render the habit list
+// Function to update the progress of a habit
+function updateProgress(index, event) {
+    const progress = event.target.value;
+    habitList[index].progress = progress;
+
+    // Update the progress text next to the progress input
+    const progressText = event.target.nextElementSibling;
+    progressText.textContent = `${progress}%`;
+
+    // Re-render the habit list
+    renderHabits();
 }
 
-// Function to remove a habit from the list
-function removeHabit(index) {
-    habits.splice(index, 1); // Remove the habit from the array
-    saveHabits(); // Save updated habits to localStorage
-    renderHabits(); // Re-render the habit list
+// Function to update the comment of a habit
+function updateComment(index, event) {
+    const comment = event.target.value;
+    habitList[index].comment = comment;
+
+    // Save the habit list to localStorage
+    localStorage.setItem('habitList', JSON.stringify(habitList));
 }
 
-// Function to save habits to localStorage
-function saveHabits() {
-    localStorage.setItem('habits', JSON.stringify(habits)); // Save habits array to localStorage
-}
-
-// Function to update the statistics display
-function updateStats() {
-    const totalHabits = habits.length; // Get total number of habits
-    document.getElementById("total-habits").textContent = `Total Habits: ${totalHabits}`;
-    document.getElementById("completed-habits").textContent = `Completed: ${completedHabits}`;
-}
-
-// Initialize the app by rendering the existing habits
+// Initial render when the page loads
 renderHabits();
+
+// Event listener for adding a new habit when the user presses Enter
+habitInput.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+        addHabit();
+    }
+});
