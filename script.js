@@ -1,7 +1,3 @@
-function changeText() {
-    document.querySelector("p").textContent = "You clicked the button!";
-}
-
 let habits = JSON.parse(localStorage.getItem('habits')) || []; // Get habits from localStorage or initialize empty array
 let completedHabits = habits.filter(habit => habit.completed).length; // Count completed habits from localStorage
 
@@ -89,6 +85,11 @@ function updateStats() {
 
 // Render the habits when the page is loaded
 renderHabits();
+function changeText() {
+    document.querySelector("p").textContent = "You clicked the button!";
+}
+
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
