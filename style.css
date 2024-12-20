@@ -1,103 +1,85 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: #f0f4f8; /* Light blue background */
+    margin: 0;
     padding: 20px;
 }
 
+#habit-tracker {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid #A89F91; /* Brown border */
+}
+
 h1 {
-    color: #4CAF50;
+    text-align: center;
+    color: #3A5A6D; /* Dark Blue */
+}
+
+#habit-input-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#habit-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #A89F91; /* Brown border for input */
+    border-radius: 5px;
 }
 
 button {
-    background-color: #4CAF50;
+    padding: 10px 15px;
+    background-color: #3A5A6D; /* Dark Blue */
     color: white;
     border: none;
-    padding: 10px 20px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #2c4f5d; /* Darker Blue */
 }
 
-
-let habits = []; // To store the list of habits
-let completedHabits = 0; // To store the count of completed habits
-
-// Function to add a habit to the list
-function addHabit() {
-    const habitInput = document.getElementById("habit-input");
-    const habitName = habitInput.value.trim();
-
-    if (habitName) {
-        const habit = {
-            name: habitName,
-            completed: false
-        };
-        habits.push(habit);
-        habitInput.value = ''; // Reset input field
-        renderHabits();
-    }
+#habit-list {
+    margin-top: 20px;
 }
 
-// Function to render the list of habits on the page
-function renderHabits() {
-    const habitList = document.getElementById("habit-list");
-    habitList.innerHTML = ""; // Clear the list
-
-    habits.forEach((habit, index) => {
-        const li = document.createElement("li");
-
-        // Create checkbox for completion
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.checked = habit.completed;
-        checkbox.addEventListener("change", () => toggleCompletion(index));
-
-        // Add habit name text
-        const habitText = document.createElement("span");
-        habitText.textContent = habit.name;
-
-        // Add remove button
-        const removeButton = document.createElement("button");
-        removeButton.textContent = "Remove";
-        removeButton.addEventListener("click", () => removeHabit(index));
-
-        // Append elements to the list item
-        li.appendChild(checkbox);
-        li.appendChild(habitText);
-        li.appendChild(removeButton);
-        habitList.appendChild(li);
-    });
-
-    // Update statistics
-    updateStats();
+.habit-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #A89F91; /* Brown border */
+    border-radius: 8px;
+    background-color: #FAF9F5; /* Light beige background */
 }
 
-// Function to toggle the completion of a habit
-function toggleCompletion(index) {
-    habits[index].completed = !habits[index].completed;
-    if (habits[index].completed) {
-        completedHabits++;
-    } else {
-        completedHabits--;
-    }
-    renderHabits();
+.habit-checkbox {
+    margin-right: 10px;
 }
 
-// Function to remove a habit from the list
-function removeHabit(index) {
-    habits.splice(index, 1);
-    renderHabits();
+#habit-comments {
+    margin-top: 10px;
+    padding: 5px;
+    border: 1px solid #A89F91;
+    border-radius: 5px;
+    width: 100%;
+    background-color: #f5f5f5;
 }
 
-// Function to update statistics
-function updateStats() {
-    const totalHabits = habits.length;
-    document.getElementById("total-habits").textContent = `Total Habits: ${totalHabits}`;
-    document.getElementById("completed-habits").textContent = `Completed: ${completedHabits}`;
+#summary {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
 }
 
-// Render the habits when the page is loaded
-renderHabits();
+#summary p {
+    color: #3A5A6D;
+}
