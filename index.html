@@ -7,24 +7,67 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="tv-container">
+        <!-- TV Frame -->
+        <div class="tv-screen">
+            <!-- Jungle Background (Trees, Water, and Vines) -->
+            <div class="background">
+                <div class="trees"></div>
+                <div class="water"></div>
+                <div class="vines"></div>
+            </div>
 
-    <div class="container">
-        <div class="header">
-            <h1>Rukymo komplementai</h1>
-            <p>kam kas diena gerai atsimenant menesius ir metus</p>
+            <!-- Habit Tracker UI -->
+            <div class="habit-container">
+                <!-- Habit 1 -->
+                <div class="habit">
+                    <div class="habit-header">
+                        <h3>Habit #1</h3>
+                        <p class="habit-description" data-word="startHealthyHabit">Start a healthy habit!</p>
+                    </div>
+                    <div class="habit-actions">
+                        <input type="checkbox" class="habit-checkbox" id="habit1">
+                        <label for="habit1">Complete Habit</label>
+                    </div>
+                    <!-- Emoji Hover Effect -->
+                    <div class="emoji-popup" data-hover="👍🌱💪"></div>
+                </div>
+
+                <!-- Habit 2 -->
+                <div class="habit">
+                    <div class="habit-header">
+                        <h3>Habit #2</h3>
+                        <p class="habit-description" data-word="drinkMoreWater">Drink more water.</p>
+                    </div>
+                    <div class="habit-actions">
+                        <input type="checkbox" class="habit-checkbox" id="habit2">
+                        <label for="habit2">Complete Habit</label>
+                    </div>
+                    <!-- Emoji Hover Effect -->
+                    <div class="emoji-popup" data-hover="💧🥤👍"></div>
+                </div>
+
+                <!-- Habit 3 -->
+                <div class="habit">
+                    <div class="habit-header">
+                        <h3>Habit #3</h3>
+                        <p class="habit-description" data-word="exerciseDaily">Exercise daily for better health.</p>
+                    </div>
+                    <div class="habit-actions">
+                        <input type="checkbox" class="habit-checkbox" id="habit3">
+                        <label for="habit3">Complete Habit</label>
+                    </div>
+                    <!-- Emoji Hover Effect -->
+                    <div class="emoji-popup" data-hover="🏋️‍♂️💪🌟"></div>
+                </div>
+            </div>
+
+            <!-- Word Frequency Counter at the bottom -->
+            <div class="word-frequency-counter">
+                <p><strong>Word Frequency:</strong> <span id="wordCount">No words yet...</span></p>
+            </div>
         </div>
-
-        <div class="habit-input-section">
-            <input type="text" id="habitInput" class="habit-input" placeholder="kiek rukei...">
-            <button id="addHabitBtn" class="habit-btn">pasitausok</button>
-        </div>
-
-        <ul id="habitList" class="habit-list"></ul>
     </div>
-
-    <footer class="footer">
-        <p>Habit Tracker &copy; 2024</p>
-    </footer>
 
     <script src="script.js"></script>
 </body>
