@@ -1,232 +1,31 @@
-/* General Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f8ff; /* Light background */
-    color: #4e4e4e;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-image: url('https://source.unsplash.com/1600x900/?jungle');
-    background-size: cover;
-    background-position: center;
-    overflow: hidden;
-    position: relative;
-    background-attachment: fixed;
-    animation: jungleBackground 60s infinite linear; /* Moving background effect */
-}
+    <div class="container">
+        <div class="header">
+            <h1>Habit Tracker</h1>
+            <p>Track your habits and make progress with your daily goals</p>
+        </div>
 
-@keyframes jungleBackground {
-    0% {
-        background-position: 0 0;
-    }
-    100% {
-        background-position: 100% 0;
-    }
-}
+        <div class="habit-input-section">
+            <input type="text" id="habitInput" class="habit-input" placeholder="Enter your habit...">
+            <button id="addHabitBtn" class="habit-btn">Add Habit</button>
+        </div>
 
-/* Habit Tracker Container */
-.container {
-    width: 80%;
-    max-width: 800px;
-    background-color: #fff8e1; /* Light yellow background */
-    padding: 20px;
-    border-radius: 15px;
-    border: 3px solid #d2691e; /* Brown border */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    position: relative;
-    z-index: 1;
-}
+        <ul id="habitList" class="habit-list"></ul>
+    </div>
 
-.header {
-    text-align: center;
-    font-size: 2rem;
-    color: #0d3b66; /* Blue color for the header */
-    margin-bottom: 20px;
-}
+    <footer class="footer">
+        <p>Habit Tracker &copy; 2024</p>
+    </footer>
 
-.header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.header p {
-    font-size: 1rem;
-    color: #555; /* Gray text for the description */
-}
-
-/* Habit Input Section */
-.habit-input-section {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.habit-input {
-    width: 70%;
-    padding: 10px;
-    font-size: 1rem;
-    border: 2px solid #d2691e; /* Brown border for input field */
-    border-radius: 5px;
-    outline: none;
-}
-
-.habit-input:focus {
-    border-color: #008CBA; /* Focused input color */
-}
-
-.habit-btn {
-    background-color: #008CBA; /* Blue button */
-    color: white;
-    font-size: 1rem;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    outline: none;
-}
-
-.habit-btn:hover {
-    background-color: #005f73; /* Darker blue when hovered */
-}
-
-/* Habit Stats Section */
-.container p {
-    font-size: 1rem;
-    color: #444;
-    text-align: left;
-    margin-bottom: 10px;
-}
-
-.container span {
-    font-weight: bold;
-    color: #0d3b66;
-}
-
-/* Habit List Section */
-.habit-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-.habit-item {
-    background-color: #f4a300; /* Yellow background for each habit card */
-    margin: 10px 0;
-    padding: 15px;
-    border-radius: 10px;
-    border: 2px solid #d2691e; /* Brown border around each habit item */
-    position: relative;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    font-size: 1rem;
-}
-
-.habit-item .habit-details {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.habit-name {
-    font-size: 1.2rem;
-    color: #0d3b66;
-    font-weight: bold;
-}
-
-.habit-comments-container {
-    margin-top: 10px;
-}
-
-.habit-comments {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #d2691e; /* Brown border for comment field */
-    border-radius: 5px;
-    margin-bottom: 10px;
-    min-height: 50px;
-    font-size: 1rem;
-    resize: none;
-}
-
-.habit-date {
-    font-size: 0.9rem;
-    color: #444;
-}
-
-/* Habit Checkbox */
-.habit-checkbox {
-    transform: scale(1.5);
-    margin-right: 10px;
-}
-
-/* Button Styling for Habit Item */
-.habit-item button {
-    background-color: #ff6347; /* Red button for habit delete */
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-}
-
-.habit-item button:hover {
-    background-color: #e53e33; /* Darker red on hover */
-}
-
-/* Flexbox Layout for Habit Item */
-.habit-item .habit-details {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.habit-item .habit-name {
-    font-size: 1.2rem;
-    color: #0d3b66; /* Blue color for habit name */
-}
-
-/* Extra Style Adjustments */
-.habit-item .habit-comments {
-    margin-top: 10px;
-}
-
-.habit-item .habit-checkbox {
-    transform: scale(1.5);
-}
-
-/* Moving Background Effect for Tree and Water Effect */
-@keyframes treeAndWaterMovement {
-    0% {
-        background-position: 0 0;
-    }
-    100% {
-        background-position: 100% 0;
-    }
-}
-
-body {
-    background-image: url('https://source.unsplash.com/1600x900/?trees,jungle,water');
-    background-size: 200% 100%;
-    animation: treeAndWaterMovement 60s infinite linear; /* Slow background animation */
-}
-
-/* Footer Section */
-.footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #0d3b66;
-    color: white;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    font-size: 1rem;
-}
+    <script src="script.js"></script>
+</body>
+</html>
