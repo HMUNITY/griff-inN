@@ -1,266 +1,204 @@
-/* General Reset */
+/* Basic resets */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body and Global Styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f8ff; /* Light background color */
-    color: #333;
-    line-height: 1.6;
-    padding: 0;
-    margin: 0;
-    overflow-x: hidden;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f8ff; /* Light blue background */
+    color: #2b2b2b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
 }
 
-/* Jungle-themed moving background with trees and water */
-@keyframes jungleBackground {
-    0% {
-        background-position: 0 0;
-    }
-    100% {
-        background-position: 3000px 0;
-    }
+/* Container for the whole page */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    background: linear-gradient(to bottom right, #89c2d9, #b56f4b); /* Blue and brown gradient */
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-body {
-    background: url('https://via.placeholder.com/1500x500.png?text=Jungle+Trees') repeat-x center bottom;
-    animation: jungleBackground 200s linear infinite;
-    background-size: cover;
-}
-
-/* Header Section */
+/* Header styling */
 header {
     text-align: center;
-    margin-top: 50px;
-    font-size: 36px;
-    color: #4a3c31; /* Brown text color */
+    margin-bottom: 40px;
 }
 
-/* Habit List Container */
-#habitList {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 30px;
+header h1 {
+    font-size: 3em;
+    color: #fff;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
-/* Individual Habit */
-.habit {
-    background-color: #b3d9ff; /* Light Blue */
-    margin: 15px;
+header p {
+    font-size: 1.1em;
+    color: #ffebcd;
+}
+
+/* New session form styling */
+#new-session {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#new-session label {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 8px;
+    display: block;
+}
+
+#new-session input,
+#new-session textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 1em;
+    color: #333;
+}
+
+#new-session textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+#track-smoke {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+}
+
+#track-smoke:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+/* Archive Section */
+#smoke-archive {
+    margin-top: 40px;
+}
+
+#smoke-archive h2 {
+    font-size: 2em;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.archive-item {
+    background-color: #fff;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.archive-item strong {
+    color: #2b2b2b;
+    font-size: 1.2em;
+}
+
+.archive-item em {
+    font-style: normal;
+    color: #555;
+}
+
+/* Word Frequency Section */
+#word-frequency {
+    margin-top: 40px;
+    background-color: #fff;
     padding: 20px;
     border-radius: 10px;
-    border: 3px solid #2e5c8b; /* Stronger blue border */
-    width: 250px;
-    position: relative;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.habit:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* Habit Header */
-.habit-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 20px;
-    color: #4a3c31; /* Brown */
-}
-
-/* Habit Description Box */
-.habit-description-box {
-    margin-top: 15px;
-    font-size: 14px;
+#word-frequency h2 {
+    font-size: 1.8em;
     color: #333;
-    border: 2px solid #2e5c8b;
-    padding: 10px;
-    border-radius: 8px;
-    background-color: #e6f2ff;
-    display: none; /* Hidden by default */
-}
-
-/* Date Input for Habit */
-.habit-date {
-    font-size: 12px;
-    color: #4a3c31;
-    border: 2px solid #2e5c8b;
-    padding: 5px;
-    border-radius: 5px;
-    background-color: #ffffff;
-    width: 100%;
-    margin-top: 10px;
-}
-
-/* Habit Checkbox */
-.habit-checkbox {
-    width: 20px;
-    height: 20px;
-}
-
-/* Emoji Popup - Hover Effect */
-.emoji-popup {
-    position: absolute;
-    bottom: -30px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 24px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-}
-
-/* Word Frequency Counter Section */
-#wordCount {
-    background-color: #ffe0b3; /* Light brown */
-    padding: 15px;
-    margin-top: 50px;
     text-align: center;
-    border-radius: 10px;
-    border: 2px solid #b37333;
-    max-width: 600px;
-    margin: 0 auto;
-    font-size: 16px;
-    line-height: 1.4;
-    color: #4a3c31; /* Brown */
+    margin-bottom: 10px;
 }
 
-#wordCount b {
+#frequentWords {
+    font-size: 1.2em;
+    color: #555;
     font-weight: bold;
 }
 
-/* Habit Description Strikethrough */
-.habit-checkbox:checked ~ .habit-header .habit-description {
-    text-decoration: line-through;
-    color: #999; /* Grey text when habit is completed */
+/* Hover Effects for Archive Items */
+.archive-item:hover {
+    background-color: #f7f7f7;
+    transform: translateY(-5px);
+    transition: all 0.3s ease-in-out;
 }
 
-/* Additional Styling for Checkboxes */
-.habit-checkbox:checked {
-    background-color: #2e5c8b; /* Blue */
-    border: 2px solid #2e5c8b;
+/* Transitions */
+button, .archive-item {
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-/* Sticky Footer for Word Frequency Counter */
-footer {
-    background-color: #4a3c31; /* Brown footer */
-    color: white;
-    padding: 15px;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-footer a {
-    color: white;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
-}
-
-/* Hover effect for showing description box */
-.habit:hover .habit-description-box {
-    display: block; /* Show description on hover */
-}
-
-/* Hover effect for Habit Emoji Popups */
-.habit:hover .emoji-popup {
-    opacity: 1; /* Pop the emoji */
-}
-
-/* Custom Styling for Theme and Color */
-.theme-blue {
-    background-color: #b3d9ff; /* Blue theme */
-    color: #4a3c31;
-}
-
-.theme-brown {
-    background-color: #4a3c31; /* Brown theme */
-    color: #ffffff;
-}
-
-/* Hover effect for Habit Completion */
-.habit-checkbox:checked ~ .habit-header .habit-description {
-    text-decoration: line-through;
-    color: #999; /* Grey when completed */
-}
-
-/* Transitions and smooth animations */
-.habit-checkbox {
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.habit-checkbox:checked {
-    transform: scale(1.3);
-}
-
-/* Emoji transition for popup effects */
-.habit:hover .emoji-popup {
-    opacity: 1;
-    transition: opacity 0.4s ease-in-out;
-}
-
-/* Additional styling for habit input fields (checkbox, date, description) */
-.habit-inputs {
-    margin-top: 20px;
+/* Flexbox Layouts for better responsiveness */
+.container {
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.habit-inputs input,
-.habit-inputs textarea {
+#new-session, #smoke-archive, #word-frequency {
     width: 100%;
-    margin: 10px 0;
-    padding: 8px;
-    border: 2px solid #2e5c8b;
-    border-radius: 5px;
-    background-color: #ffffff;
+    max-width: 600px;
+    margin-bottom: 30px;
 }
 
-/* Custom Styling for Strikethrough */
-.habit-completed .habit-description {
-    text-decoration: line-through;
-    color: #bbb; /* Light grey for completed habits */
+/* Styling for the word frequency counter */
+#frequentWords {
+    color: #2b2b2b;
+    font-weight: bold;
+    font-size: 1.2em;
+    line-height: 1.6;
 }
 
-/* Transition Effect for Habit Completion */
-.habit-checkbox:checked ~ .habit-header {
-    background-color: #b0e0e6; /* Blueish background when checked */
-    transition: background-color 0.3s ease;
+/* Animations for the Background */
+@keyframes movingBackground {
+    0% { background-position: 0 0; }
+    100% { background-position: 100% 0; }
 }
 
-/* Adding a smoother background effect */
-.habit:hover {
-    background-color: #b0e0e6; /* Light blue background on hover */
-    transition: background-color 0.4s ease;
+body {
+    animation: movingBackground 20s linear infinite;
 }
 
-/* Styling the "completed" habits */
-.habit-completed {
-    opacity: 0.5; /* Dim completed habits */
+/* Smoky Jungle Look */
+.container {
+    background-image: url('https://path-to-your-image.com/jungle-background.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
-/* Background colors for habit items */
-.habit {
-    background-color: #d0e7ff; /* Light blue color for the habit card */
-    border-radius: 15px;
-    padding: 20px;
-    margin: 20px;
+/* Add a soft shadow to the body for a more refined look */
+body {
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
-.habit-completed {
-    background-color: #c1e0ff; /* Light blue shade for completed */
-}
