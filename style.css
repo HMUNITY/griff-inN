@@ -1,31 +1,178 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Habit Tracker</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    <div class="container">
-        <div class="header">
-            <h1>Habit Tracker</h1>
-            <p>Track your habits and make progress with your daily goals</p>
-        </div>
+/* Body and Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f8ff;
+    color: #333;
+    line-height: 1.6;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
 
-        <div class="habit-input-section">
-            <input type="text" id="habitInput" class="habit-input" placeholder="Enter your habit...">
-            <button id="addHabitBtn" class="habit-btn">Add Habit</button>
-        </div>
+/* Jungle-themed moving background with trees and water */
+@keyframes jungleBackground {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 3000px 0;
+    }
+}
 
-        <ul id="habitList" class="habit-list"></ul>
-    </div>
+body {
+    background: url('https://via.placeholder.com/1500x500.png?text=Jungle+Trees') repeat-x center bottom;
+    animation: jungleBackground 200s linear infinite;
+}
 
-    <footer class="footer">
-        <p>Habit Tracker &copy; 2024</p>
-    </footer>
+/* Header Section */
+header {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 36px;
+    color: #4a3c31; /* Brown text color */
+}
 
-    <script src="script.js"></script>
-</body>
-</html>
+/* Habit List Container */
+#habitList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+/* Individual Habit */
+.habit {
+    background-color: #b3d9ff; /* Light Blue */
+    margin: 15px;
+    padding: 20px;
+    border-radius: 10px;
+    border: 3px solid #2e5c8b; /* Stronger blue border */
+    width: 250px;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.habit:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Habit Header */
+.habit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+    color: #4a3c31; /* Brown */
+}
+
+.habit-description {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.habit-checkbox {
+    width: 20px;
+    height: 20px;
+}
+
+/* Emoji Popup - Hover Effect */
+.emoji-popup {
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* Word Frequency Counter Section */
+#wordCount {
+    background-color: #ffe0b3; /* Light brown */
+    padding: 15px;
+    margin-top: 50px;
+    text-align: center;
+    border-radius: 10px;
+    border: 2px solid #b37333;
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #4a3c31; /* Brown */
+}
+
+#wordCount b {
+    font-weight: bold;
+}
+
+/* Habit Description Strikethrough */
+.habit-checkbox:checked ~ .habit-header .habit-description {
+    text-decoration: line-through;
+    color: #999; /* Grey text when habit is completed */
+}
+
+/* Additional Styling for Checkboxes */
+.habit-checkbox:checked {
+    background-color: #2e5c8b; /* Blue */
+    border: 2px solid #2e5c8b;
+}
+
+/* Custom Style for the "completed" state of habits */
+.habit-completed {
+    background-color: #c1e0ff;
+}
+
+/* Transition Effects */
+.habit-checkbox {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.habit-checkbox:checked {
+    transform: scale(1.3);
+}
+
+/* Styling for Buttons (optional if you want to add buttons later) */
+button {
+    background-color: #4a3c31;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2e5c8b;
+}
+
+/* Sticky Footer for Word Frequency Counter */
+footer {
+    background-color: #4a3c31; /* Brown footer */
+    color: white;
+    padding: 15px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
