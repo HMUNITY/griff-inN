@@ -8,16 +8,18 @@ const completedHabits = document.getElementById('completed-habits');
 // Function to render habits from habitList
 function renderHabits() {
     habitListSection.innerHTML = ''; // Clear current habit list
+
     habitList.forEach((habit, index) => {
         const li = document.createElement('li');
         li.classList.add('habit-item');
 
         // Habit item HTML structure with extra punctuation fields
         li.innerHTML = `
-            <input type="checkbox" class="habit-checkbox" ${habit.completed ? 'checked' : ''} onclick="toggleCompleted(${index})">
-            <span class="habit-name">${habit.name}</span>
-            <span class="habit-date">(${habit.date})</span>
-
+            <div class="habit-details">
+                <input type="checkbox" class="habit-checkbox" ${habit.completed ? 'checked' : ''} onclick="toggleCompleted(${index})">
+                <span class="habit-name">${habit.name}</span>
+                <span class="habit-date">(${habit.date})</span>
+            </div>
             <!-- Extra punctuation/comments section -->
             <div class="habit-comments-container">
                 <textarea class="habit-comments" placeholder="Add a note..." onchange="updateComments(${index}, this.value)">${habit.comments.join('\n') || ''}</textarea>
@@ -78,4 +80,10 @@ function addHabit() {
     // Clear the input field and re-render the list
     habitInput.value = '';
     renderHabits();
+}
 
+// Event listener for adding a new habit
+document.getElementById('add-habit-button').addEventListener('click', addHabit);
+
+// Render the habits when the page loads
+renderHabits();
