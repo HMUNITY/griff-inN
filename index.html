@@ -3,34 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Habit Tracker</title>
+    <title>Habit Tracker</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #4e4e4e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://source.unsplash.com/1600x900/?jungle');
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            position: relative;
+            background-attachment: fixed;
+        }
+
+        /* Custom Design for Habit Tracker */
+        .container {
+            width: 80%;
+            max-width: 800px;
+            background-color: #fff8e1;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #d2691e;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            font-size: 2rem;
+            color: #0d3b66;
+            margin-bottom: 20px;
+        }
+
+        .habit-input-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .habit-input {
+            width: 70%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 2px solid #d2691e;
+            border-radius: 5px;
+        }
+
+        .habit-btn {
+            background-color: #008CBA;
+            color: white;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .habit-btn:hover {
+            background-color: #005f73;
+        }
+
+        .habit-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .habit-item {
+            background-color: #f4a300;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #d2691e;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .habit-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .habit-name {
+            font-size: 1.2rem;
+            color: #0d3b66;
+        }
+
+        .habit-comments-container {
+            margin-top: 10px;
+        }
+
+        .habit-comments {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d2691e;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            min-height: 50px;
+            font-size: 1rem;
+        }
+
+        .habit-checkbox {
+            transform: scale(1.5);
+            margin-right: 10px;
+        }
+
+        .habit-date {
+            font-size: 0.9rem;
+            color: #444;
+        }
+
+        .habit-item button {
+            background-color: #ff6347;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .habit-item button:hover {
+            background-color: #e53e33;
+        }
+
+        /* Custom animations for background */
+        @keyframes jungleBackground {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 100% 0;
+            }
+        }
+
+        /* Add moving jungle trees background */
+        body {
+            animation: jungleBackground 60s infinite linear;
+            background-image: url('https://source.unsplash.com/1600x900/?water,jungle');
+            background-size: 200% 100%;
+        }
+    </style>
 </head>
 <body>
-    <div id="background">
-        <div id="trees"></div> <!-- For tree columns -->
-    </div>
 
-    <div id="habit-tracker">
-        <h1>🌿 Jungle Habit Tracker 🌿</h1>
-        
-        <!-- Habit input section -->
-        <div id="habit-input-section">
-            <input type="text" id="habit-input" placeholder="Enter a new habit" />
-            <button id="add-habit-button">Add Habit 🍃</button>
+    <!-- Habit Tracker Container -->
+    <div class="container">
+        <div class="header">
+            <h1>🌿 Habit Tracker 🌿</h1>
+            <p>Track your habits with ease! Keep improving daily. 💪</p>
         </div>
 
-        <!-- List of habits -->
-        <h2>Your Habits 🌱</h2>
-        <div id="habit-list"></div>
+        <!-- Habit Input Section -->
+        <div class="habit-input-section">
+            <input type="text" id="habit-input" class="habit-input" placeholder="Add a new habit...">
+            <button id="add-habit-button" class="habit-btn">Add Habit</button>
+        </div>
 
-        <!-- Summary section (completed count) -->
-        <div id="summary">
+        <!-- Habit Stats -->
+        <div>
             <p>Total Habits: <span id="total-habits">0</span></p>
             <p>Completed Habits: <span id="completed-habits">0</span></p>
         </div>
+
+        <!-- Habit List Section -->
+        <ul id="habit-list" class="habit-list">
+            <!-- Habit Items will appear here dynamically -->
+        </ul>
     </div>
 
+    <!-- Including Script -->
     <script src="script.js"></script>
 </body>
 </html>
