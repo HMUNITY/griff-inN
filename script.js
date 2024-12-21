@@ -1,73 +1,90 @@
-// Get DOM elements
-const habitInput = document.getElementById("habitInput");
-const addHabitBtn = document.getElementById("addHabitBtn");
-const habitList = document.getElementById("habitList");
+// JavaScript to handle habit interactions, word frequency counter, and emoji popups
 
-// Array to store habit items
-let habits = [];
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all habit descriptions and checkboxes
+    const habitCheckboxes = document.querySelectorAll('.habit-checkbox');
+    const habitDescriptions = document.querySelectorAll('.habit-description');
+    const emojiPopups = document.querySelectorAll('.emoji-popup');
+    const wordCountElement = document.getElementById('wordCount');
+    
+    let wordFrequency = {};
 
-// Add habit function
-addHabitBtn.addEventListener("click", () => {
-    const habitText = habitInput.value.trim();
+    // Add event listener to each checkbox for tracking completion of habits
+    habitCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const habitId = checkbox.id;
+            const habitDescription = document.querySelector(`#${habitId} ~ .habit-header .habit-description`);
 
-    if (habitText) {
-        const habit = {
-            name: habitText,
-            completed: false,
-            comments: "",
-            dateAdded: new Date().toLocaleDateString()
-        };
-        habits.push(habit);
-        habitInput.value = ""; // Clear input
-        renderHabits();
-    }
-});
+            // If the checkbox is checked, mark the habit as completed
+            if (checkbox.checked) {
+                habitDescription.style.textDecoration = 'line-through';
+            } else {
+                habitDescription.style.textDecoration = 'none';
+            }
 
-// Render all habits
-function renderHabits() {
-    habitList.innerHTML = ""; // Clear existing list
-    habits.forEach((habit, index) => {
-        const li = document.createElement("li");
-        li.classList.add("habit-item");
-
-        li.innerHTML = `
-            <div class="habit-details">
-                <span class="habit-name">${habit.name}</span>
-                <input type="checkbox" class="habit-checkbox" ${habit.completed ? "checked" : ""} data-index="${index}">
-            </div>
-            <div class="habit-comments-container">
-                <textarea class="habit-comments" placeholder="Add your comments here..." data-index="${index}">${habit.comments}</textarea>
-            </div>
-            <p class="habit-date">Added on: ${habit.dateAdded}</p>
-            <button class="remove-habit-btn" data-index="${index}">Remove Habit</button>
-        `;
-
-        habitList.appendChild(li);
+            // Update word frequency when habit description is checked
+            updateWordFrequency(habitDescription.textContent);
+        });
     });
-}
 
-// Handle habit checkbox change
-habitList.addEventListener("change", (e) => {
-    if (e.target.classList.contains("habit-checkbox")) {
-        const index = e.target.getAttribute("data-index");
-        habits[index].completed = e.target.checked;
-        renderHabits();
-    }
-});
+    // Function to update the word frequency counter
+    function updateWordFrequency(text) {
+        const words = text.split(' ');
 
-// Handle comment change
-habitList.addEventListener("input", (e) => {
-    if (e.target.classList.contains("habit-comments")) {
-        const index = e.target.getAttribute("data-index");
-        habits[index].comments = e.target.value;
-    }
-});
+        words.forEach(word => {
+            word = word.toLowerCase();
+            if (word) {
+                if (wordFrequency[word]) {
+                    wordFrequency[word]++;
+                } else {
+                    wordFrequency[word] = 1;
+                }
+            }
+        });
 
-// Remove habit function
-habitList.addEventListener("click", (e) => {
-    if (e.target.classList.contains("remove-habit-btn")) {
-        const index = e.target.getAttribute("data-index");
-        habits.splice(index, 1);
-        renderHabits();
+        // Update the word count display
+        displayWordFrequency();
     }
+
+    // Function to display word frequency on the page
+    function displayWordFrequency() {
+        let wordDisplay = '';
+        for (let word in wordFrequency) {
+            wordDisplay += `${word}: ${wordFrequency[word]} times<br>`;
+        }
+        wordCountElement.innerHTML = wordDisplay || 'No words yet...';
+    }
+
+    // Add hover effect to each habit's description for emoji popup
+    habitDescriptions.forEach(description => {
+        description.addEventListener('mouseover', function() {
+            const emojiPopup = description.nextElementSibling.querySelector('.emoji-popup');
+            const emojis = emojiPopup.getAttribute('data-hover');
+
+            // Show emojis as popup when mouseover
+            emojiPopup.textContent = emojis;
+            emojiPopup.style.opacity = 1; // Make it visible
+        });
+
+        description.addEventListener('mouseout', function() {
+            const emojiPopup = description.nextElementSibling.querySelector('.emoji-popup');
+
+            // Hide emojis when mouse leaves the description
+            emojiPopup.style.opacity = 0; // Make it disappear
+        });
+    });
+
+    // Add transition effect for hovering and updating frequency stats
+    const habits = document.querySelectorAll('.habit');
+    habits.forEach(habit => {
+        habit.addEventListener('transitionend', function() {
+            habit.style.transition = 'all 0.3s ease';
+        });
+    });
+
+    // Handling the date-based functionality (using current date for each habit)
+    const date = new Date();
+    const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    console.log(`Today's date: ${formattedDate}`);
+
 });
