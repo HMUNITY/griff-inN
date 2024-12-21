@@ -1,90 +1,86 @@
-// JavaScript to handle habit interactions, word frequency counter, and emoji popups
+// Array to hold the habit data, including the habit descriptions
+const habits = [
+    { id: 1, name: 'Drink Water', description: 'Drink at least 2 liters of water a day to stay hydrated and healthy.', emoji: '💧' },
+    { id: 2, name: 'Exercise', description: 'Do at least 30 minutes of exercise daily to boost your mood and energy.', emoji: '💪' },
+    { id: 3, name: 'Read a Book', description: 'Read for at least 15 minutes to improve your knowledge and relax.', emoji: '📚' }
+];
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Get all habit descriptions and checkboxes
-    const habitCheckboxes = document.querySelectorAll('.habit-checkbox');
-    const habitDescriptions = document.querySelectorAll('.habit-description');
-    const emojiPopups = document.querySelectorAll('.emoji-popup');
-    const wordCountElement = document.getElementById('wordCount');
-    
-    let wordFrequency = {};
+// Track the checked status for each habit
+const habitStatuses = {
+    1: false,
+    2: false,
+    3: false
+};
 
-    // Add event listener to each checkbox for tracking completion of habits
-    habitCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            const habitId = checkbox.id;
-            const habitDescription = document.querySelector(`#${habitId} ~ .habit-header .habit-description`);
+// Update word frequency counter
+let wordFrequency = {};
 
-            // If the checkbox is checked, mark the habit as completed
-            if (checkbox.checked) {
-                habitDescription.style.textDecoration = 'line-through';
-            } else {
-                habitDescription.style.textDecoration = 'none';
-            }
+// Function to toggle the habit's completion (checkbox clicked)
+function toggleHabit(habitId) {
+    const habit = habits.find(h => h.id === habitId);
+    habitStatuses[habitId] = !habitStatuses[habitId];
 
-            // Update word frequency when habit description is checked
-            updateWordFrequency(habitDescription.textContent);
-        });
-    });
-
-    // Function to update the word frequency counter
-    function updateWordFrequency(text) {
-        const words = text.split(' ');
-
-        words.forEach(word => {
-            word = word.toLowerCase();
-            if (word) {
-                if (wordFrequency[word]) {
-                    wordFrequency[word]++;
-                } else {
-                    wordFrequency[word] = 1;
-                }
-            }
-        });
-
-        // Update the word count display
-        displayWordFrequency();
+    // Update the habit description visibility based on checkbox state
+    const habitDescriptionBox = document.getElementById(`description${habitId}`);
+    if (habitStatuses[habitId]) {
+        habitDescriptionBox.style.textDecoration = 'line-through';
+    } else {
+        habitDescriptionBox.style.textDecoration = 'none';
     }
 
-    // Function to display word frequency on the page
-    function displayWordFrequency() {
-        let wordDisplay = '';
-        for (let word in wordFrequency) {
-            wordDisplay += `${word}: ${wordFrequency[word]} times<br>`;
+    // Update word frequency with the current habit's description
+    updateWordFrequency(habit.description);
+}
+
+// Function to handle emoji popup on hover
+function showEmojiPopup(habitId) {
+    const emojiElement = document.getElementById(`emoji${habitId}`);
+    emojiElement.style.display = 'block';
+}
+
+function hideEmojiPopup(habitId) {
+    const emojiElement = document.getElementById(`emoji${habitId}`);
+    emojiElement.style.display = 'none';
+}
+
+// Function to update word frequency based on habit description
+function updateWordFrequency(description) {
+    const words = description.split(/\s+/); // Split description into words
+    words.forEach(word => {
+        word = word.toLowerCase().replace(/[^\w\s]/g, ''); // Remove punctuation and make lowercase
+        if (word.length > 0) {
+            wordFrequency[word] = (wordFrequency[word] || 0) + 1;
         }
-        wordCountElement.innerHTML = wordDisplay || 'No words yet...';
-    }
-
-    // Add hover effect to each habit's description for emoji popup
-    habitDescriptions.forEach(description => {
-        description.addEventListener('mouseover', function() {
-            const emojiPopup = description.nextElementSibling.querySelector('.emoji-popup');
-            const emojis = emojiPopup.getAttribute('data-hover');
-
-            // Show emojis as popup when mouseover
-            emojiPopup.textContent = emojis;
-            emojiPopup.style.opacity = 1; // Make it visible
-        });
-
-        description.addEventListener('mouseout', function() {
-            const emojiPopup = description.nextElementSibling.querySelector('.emoji-popup');
-
-            // Hide emojis when mouse leaves the description
-            emojiPopup.style.opacity = 0; // Make it disappear
-        });
     });
 
-    // Add transition effect for hovering and updating frequency stats
-    const habits = document.querySelectorAll('.habit');
+    displayWordFrequency();
+}
+
+// Function to display word frequency
+function displayWordFrequency() {
+    const frequentWordsElement = document.getElementById('frequentWords');
+    const sortedWords = Object.entries(wordFrequency).sort((a, b) => b[1] - a[1]);
+    const topWords = sortedWords.slice(0, 5); // Get the top 5 most frequent words
+    frequentWordsElement.innerHTML = topWords.map(word => `${word[0]} (${word[1]})`).join(', ');
+}
+
+// Add event listeners to handle hover effects for habit cards
+document.addEventListener('DOMContentLoaded', () => {
     habits.forEach(habit => {
-        habit.addEventListener('transitionend', function() {
-            habit.style.transition = 'all 0.3s ease';
+        const habitElement = document.getElementById(`habit${habit.id}`);
+
+        // Show emoji popup on hover
+        habitElement.addEventListener('mouseenter', () => showEmojiPopup(habit.id));
+        habitElement.addEventListener('mouseleave', () => hideEmojiPopup(habit.id));
+
+        // Add event listener to update habit completion status
+        const checkbox = document.getElementById(`habit${habit.id}`);
+        checkbox.addEventListener('change', () => toggleHabit(habit.id));
+
+        // Add date input event listener (optional feature)
+        const dateInput = document.getElementById(`date${habit.id}`);
+        dateInput.addEventListener('change', (e) => {
+            console.log(`Habit ${habit.name} completed on ${e.target.value}`);
         });
     });
-
-    // Handling the date-based functionality (using current date for each habit)
-    const date = new Date();
-    const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-    console.log(`Today's date: ${formattedDate}`);
-
 });
