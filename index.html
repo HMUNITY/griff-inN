@@ -1,78 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Habit Tracker</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>rukymui komplementas su komplimentais</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+    <!-- Main Container -->
+    <div class="container">
 
-    <!-- Header Section -->
-    <header>
-        <h1>Habit Tracker Jungle</h1>
-        <p>Track your daily habits in the wild jungle! Stay healthy and feel the change!</p>
-    </header>
+        <!-- Header Section -->
+        <header>
+            <h1>rukymui komplementas su komplimentais</h1>
+            <p>Track your smoking habits and improve step-by-step!</p>
+        </header>
 
-    <!-- Habit List Container -->
-    <div id="habitList">
-        <!-- Example Habit Cards -->
-        <div class="habit">
-            <div class="habit-header">
-                <span>Drink Water</span>
-                <input type="checkbox" class="habit-checkbox" id="habit1" onclick="toggleHabit(1)">
-            </div>
-            <div class="habit-description-box" id="description1">
-                Drink at least 2 liters of water a day to stay hydrated and healthy.
-            </div>
-            <input type="date" class="habit-date" id="date1">
-            <div class="emoji-popup" id="emoji1">💧</div>
+        <!-- New Session Section -->
+        <div id="new-session">
+            <h2>rukyk kiek nori</h2>
+            <form id="smokeForm">
+                <label for="habit-desc">greitai rukai, pasitausoki:</label>
+                <textarea id="habit-desc" placeholder="greitai rukai, pasitausoki..." required></textarea>
+
+                <label for="habit-date">Date:</label>
+                <input type="date" id="habit-date" required>
+
+                <label for="habit-duration">Duration (in minutes):</label>
+                <input type="number" id="habit-duration" min="1" required>
+
+                <label for="habit-emoji">Select Emoji for Mood:</label>
+                <input type="text" id="habit-emoji" placeholder="Enter emoji here..." required>
+
+                <button type="submit" id="track-smoke">Ka rukei</button>
+            </form>
         </div>
 
-        <div class="habit">
-            <div class="habit-header">
-                <span>Exercise</span>
-                <input type="checkbox" class="habit-checkbox" id="habit2" onclick="toggleHabit(2)">
-            </div>
-            <div class="habit-description-box" id="description2">
-                Do at least 30 minutes of exercise daily to boost your mood and energy.
-            </div>
-            <input type="date" class="habit-date" id="date2">
-            <div class="emoji-popup" id="emoji2">💪</div>
+        <!-- Archive Section -->
+        <div id="smoke-archive">
+            <h2>Prisirukei</h2>
+            <div id="archive-list"></div>
         </div>
 
-        <div class="habit">
-            <div class="habit-header">
-                <span>Read a Book</span>
-                <input type="checkbox" class="habit-checkbox" id="habit3" onclick="toggleHabit(3)">
-            </div>
-            <div class="habit-description-box" id="description3">
-                Read for at least 15 minutes to improve your knowledge and relax.
-            </div>
-            <input type="date" class="habit-date" id="date3">
-            <div class="emoji-popup" id="emoji3">📚</div>
+        <!-- Word Frequency Counter Section -->
+        <div id="word-frequency">
+            <h2>Word Frequency Tracker</h2>
+            <div id="frequentWords"></div>
         </div>
 
-    </div>
-
-    <!-- Word Frequency Counter Section -->
-    <div id="wordCount">
-        <h2>Word Frequency Counter</h2>
-        <p>Words you use the most in your habits will appear here.</p>
-        <div>
-            <b>Most Frequent Words: </b><span id="frequentWords">None yet</span>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <p>Habit Tracker Jungle © 2024</p>
-        <a href="#">Privacy Policy</a>
-    </footer>
+    </div> <!-- End of container -->
 
     <script src="script.js"></script>
 </body>
-
 </html>
