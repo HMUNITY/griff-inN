@@ -8,7 +8,7 @@
 /* Body and Global Styles */
 body {
     font-family: Arial, sans-serif;
-    background: #f0f8ff;
+    background-color: #f0f8ff; /* Light background color */
     color: #333;
     line-height: 1.6;
     padding: 0;
@@ -29,6 +29,7 @@ body {
 body {
     background: url('https://via.placeholder.com/1500x500.png?text=Jungle+Trees') repeat-x center bottom;
     animation: jungleBackground 200s linear infinite;
+    background-size: cover;
 }
 
 /* Header Section */
@@ -58,6 +59,7 @@ header {
     position: relative;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
+    overflow: hidden;
 }
 
 .habit:hover {
@@ -74,11 +76,31 @@ header {
     color: #4a3c31; /* Brown */
 }
 
-.habit-description {
-    flex: 1;
-    margin-left: 10px;
+/* Habit Description Box */
+.habit-description-box {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #333;
+    border: 2px solid #2e5c8b;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #e6f2ff;
+    display: none; /* Hidden by default */
 }
 
+/* Date Input for Habit */
+.habit-date {
+    font-size: 12px;
+    color: #4a3c31;
+    border: 2px solid #2e5c8b;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Habit Checkbox */
 .habit-checkbox {
     width: 20px;
     height: 20px;
@@ -127,36 +149,6 @@ header {
     border: 2px solid #2e5c8b;
 }
 
-/* Custom Style for the "completed" state of habits */
-.habit-completed {
-    background-color: #c1e0ff;
-}
-
-/* Transition Effects */
-.habit-checkbox {
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.habit-checkbox:checked {
-    transform: scale(1.3);
-}
-
-/* Styling for Buttons (optional if you want to add buttons later) */
-button {
-    background-color: #4a3c31;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #2e5c8b;
-}
-
 /* Sticky Footer for Word Frequency Counter */
 footer {
     background-color: #4a3c31; /* Brown footer */
@@ -175,4 +167,100 @@ footer a {
 
 footer a:hover {
     text-decoration: underline;
+}
+
+/* Hover effect for showing description box */
+.habit:hover .habit-description-box {
+    display: block; /* Show description on hover */
+}
+
+/* Hover effect for Habit Emoji Popups */
+.habit:hover .emoji-popup {
+    opacity: 1; /* Pop the emoji */
+}
+
+/* Custom Styling for Theme and Color */
+.theme-blue {
+    background-color: #b3d9ff; /* Blue theme */
+    color: #4a3c31;
+}
+
+.theme-brown {
+    background-color: #4a3c31; /* Brown theme */
+    color: #ffffff;
+}
+
+/* Hover effect for Habit Completion */
+.habit-checkbox:checked ~ .habit-header .habit-description {
+    text-decoration: line-through;
+    color: #999; /* Grey when completed */
+}
+
+/* Transitions and smooth animations */
+.habit-checkbox {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.habit-checkbox:checked {
+    transform: scale(1.3);
+}
+
+/* Emoji transition for popup effects */
+.habit:hover .emoji-popup {
+    opacity: 1;
+    transition: opacity 0.4s ease-in-out;
+}
+
+/* Additional styling for habit input fields (checkbox, date, description) */
+.habit-inputs {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.habit-inputs input,
+.habit-inputs textarea {
+    width: 100%;
+    margin: 10px 0;
+    padding: 8px;
+    border: 2px solid #2e5c8b;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+
+/* Custom Styling for Strikethrough */
+.habit-completed .habit-description {
+    text-decoration: line-through;
+    color: #bbb; /* Light grey for completed habits */
+}
+
+/* Transition Effect for Habit Completion */
+.habit-checkbox:checked ~ .habit-header {
+    background-color: #b0e0e6; /* Blueish background when checked */
+    transition: background-color 0.3s ease;
+}
+
+/* Adding a smoother background effect */
+.habit:hover {
+    background-color: #b0e0e6; /* Light blue background on hover */
+    transition: background-color 0.4s ease;
+}
+
+/* Styling the "completed" habits */
+.habit-completed {
+    opacity: 0.5; /* Dim completed habits */
+}
+
+/* Background colors for habit items */
+.habit {
+    background-color: #d0e7ff; /* Light blue color for the habit card */
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px;
+}
+
+.habit-completed {
+    background-color: #c1e0ff; /* Light blue shade for completed */
 }
