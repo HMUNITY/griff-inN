@@ -39,16 +39,27 @@ function updateWordFrequencyCounter(habits) {
 
 // Display habit archive
 function displayArchive(habits) {
-    archiveList.innerHTML = habits.map(habit => `
-        <div class="habit-item">
+    archiveList.innerHTML = habits.map(habit => 
+        `<div class="archive-item" style="background-color: ${getColorForEmoji(habit.emoji)};">
             <div class="habit-description">
-                <p><strong>Date:</strong> ${habit.date}</p>
+                <p><strong>Data:</strong> ${habit.date}</p>
                 <p><strong>Duration:</strong> ${habit.duration} min</p>
                 <p><strong>Description:</strong> ${habit.description}</p>
                 <p><strong>Emoji:</strong> <span class="habit-emoji">${habit.emoji}</span></p>
+                <p><strong>Link:</strong> <a href="${habit.link}" target="_blank">${habit.link}</a></p>
             </div>
-        </div>
-    `).join('');
+        </div>`
+    ).join('');
+}
+
+// Helper function to assign color based on emoji
+function getColorForEmoji(emoji) {
+    const colors = {
+        "😊": "#ffeb3b",
+        "😞": "#f44336",
+        "😀": "#4caf50"
+    };
+    return colors[emoji] || "#fff";
 }
 
 // Handle new habit submission
@@ -59,13 +70,16 @@ smokeForm.addEventListener('submit', function (event) {
     const habitDate = document.getElementById('habit-date').value;
     const habitDuration = document.getElementById('habit-duration').value;
     const habitEmoji = document.getElementById('habit-emoji').value.trim();
+    const habitComment = document.getElementById('habit-comment').value.trim();
+    const habitLink = document.getElementById('habit-link').value.trim();
 
     if (habitDesc && habitDate && habitDuration && habitEmoji) {
         const newHabit = {
             description: habitDesc,
             date: habitDate,
             duration: habitDuration,
-            emoji: habitEmoji
+            emoji: habitEmoji,
+            link: habitLink
         };
 
         // Retrieve existing habits from localStorage or start fresh
@@ -99,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Hover effect to show emoji
 document.addEventListener('mouseover', function (event) {
-    if (event.target.classList.contains('habit-item')) {
+    if (event.target.classList.contains('archive-item')) {
         const emoji = event.target.querySelector('.habit-emoji').textContent;
         const emojiPop = document.createElement('div');
         emojiPop.classList.add('emoji-pop');
