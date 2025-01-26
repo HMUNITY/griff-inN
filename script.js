@@ -14,6 +14,15 @@ function saveDataToStorage(data) {
     localStorage.setItem('smokeHabits', JSON.stringify(data));
 }
 
+// Helper function to delete habit by index
+function deleteHabit(index) {
+    const habits = getDataFromStorage();
+    habits.splice(index, 1); // Remove the habit from the array
+    saveDataToStorage(habits); // Save the updated list back to localStorage
+    displayArchive(habits); // Update the UI
+    updateWordFrequencyCounter(habits); // Recalculate word frequency
+}
+
 // Helper function to update the word frequency counter
 function updateWordFrequencyCounter(habits) {
     const wordCount = {};
@@ -39,27 +48,17 @@ function updateWordFrequencyCounter(habits) {
 
 // Display habit archive
 function displayArchive(habits) {
-    archiveList.innerHTML = habits.map(habit => 
-        `<div class="archive-item" style="background-color: ${getColorForEmoji(habit.emoji)};">
+    archiveList.innerHTML = habits.map((habit, index) => 
+        `<div class="habit-item">
             <div class="habit-description">
-                <p><strong>Data:</strong> ${habit.date}</p>
+                <p><strong>Date:</strong> ${habit.date}</p>
                 <p><strong>Duration:</strong> ${habit.duration} min</p>
                 <p><strong>Description:</strong> ${habit.description}</p>
                 <p><strong>Emoji:</strong> <span class="habit-emoji">${habit.emoji}</span></p>
-                <p><strong>Link:</strong> <a href="${habit.link}" target="_blank">${habit.link}</a></p>
+                <button class="delete-btn" onclick="deleteHabit(${index})">Delete</button>
             </div>
         </div>`
     ).join('');
-}
-
-// Helper function to assign color based on emoji
-function getColorForEmoji(emoji) {
-    const colors = {
-        "😊": "#ffeb3b",
-        "😞": "#f44336",
-        "😀": "#4caf50"
-    };
-    return colors[emoji] || "#fff";
 }
 
 // Handle new habit submission
@@ -70,16 +69,13 @@ smokeForm.addEventListener('submit', function (event) {
     const habitDate = document.getElementById('habit-date').value;
     const habitDuration = document.getElementById('habit-duration').value;
     const habitEmoji = document.getElementById('habit-emoji').value.trim();
-    const habitComment = document.getElementById('habit-comment').value.trim();
-    const habitLink = document.getElementById('habit-link').value.trim();
 
     if (habitDesc && habitDate && habitDuration && habitEmoji) {
         const newHabit = {
             description: habitDesc,
             date: habitDate,
             duration: habitDuration,
-            emoji: habitEmoji,
-            link: habitLink
+            emoji: habitEmoji
         };
 
         // Retrieve existing habits from localStorage or start fresh
@@ -109,20 +105,4 @@ document.addEventListener('DOMContentLoaded', function () {
     // Update the word frequency counter and archive display
     updateWordFrequencyCounter(habits);
     displayArchive(habits);
-});
-
-// Hover effect to show emoji
-document.addEventListener('mouseover', function (event) {
-    if (event.target.classList.contains('archive-item')) {
-        const emoji = event.target.querySelector('.habit-emoji').textContent;
-        const emojiPop = document.createElement('div');
-        emojiPop.classList.add('emoji-pop');
-        emojiPop.textContent = emoji;
-        event.target.appendChild(emojiPop);
-
-        // Remove emoji pop when mouse leaves
-        event.target.addEventListener('mouseleave', function () {
-            emojiPop.remove();
-        });
-    }
 });
