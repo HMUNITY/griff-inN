@@ -1,55 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="lt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>rukymui komplementas su komplimentais</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Rūkymo įpročių stebėjimas</title>
+    <link rel="stylesheet" href="stilius.css">
 </head>
 <body>
-    <!-- Main Container -->
+    <!-- Pagrindinis konteineris -->
     <div class="container">
-
-        <!-- Header Section -->
         <header>
-            <h1>rukymui komplementas su komplimentais</h1>
-            <p>Track your smoking habits and improve step-by-step!</p>
+            <h1>Rūkymo įpročių stebėjimas</h1>
+            <p>Sekite savo rūkymo įpročius ir tobulėkite žingsnis po žingsnio!</p>
         </header>
 
-        <!-- New Session Section -->
+        <!-- Naujos sesijos dalis -->
         <div id="new-session">
-            <h2>rukyk kiek nori</h2>
+            <h2>Pridėti naują įrašą</h2>
             <form id="smokeForm">
-                <label for="habit-desc">greitai rukai, pasitausoki:</label>
-                <textarea id="habit-desc" placeholder="greitai rukai, pasitausoki..." required></textarea>
+                <label for="habit-desc">Trumpai aprašykite savo įprotį:</label>
+                <textarea id="habit-desc" placeholder="Įveskite aprašymą..." required></textarea>
 
-                <label for="habit-date">Date:</label>
+                <label for="habit-date">Data:</label>
                 <input type="date" id="habit-date" required>
 
-                <label for="habit-duration">Duration (in minutes):</label>
+                <label for="habit-duration">Trukmė (minutėmis):</label>
                 <input type="number" id="habit-duration" min="1" required>
 
-                <label for="habit-emoji">Select Emoji for Mood:</label>
-                <input type="text" id="habit-emoji" placeholder="Enter emoji here..." required>
+                <label for="habit-emoji">Pasirinkite emocijos simbolį:</label>
+                <input type="text" id="habit-emoji" placeholder="Įrašykite emociją..." required>
 
-                <button type="submit" id="track-smoke">Ka rukei</button>
+                <label for="habit-comment">Komentaras (nebūtina):</label>
+                <textarea id="habit-comment" placeholder="Įveskite komentarą..."></textarea>
+
+                <label for="habit-link">Nuoroda (nebūtina):</label>
+                <input type="url" id="habit-link" placeholder="Pridėkite nuorodą...">
+
+                <button type="submit" id="track-smoke">Išsaugoti</button>
             </form>
         </div>
 
-        <!-- Archive Section -->
+        <!-- Archyvo dalis -->
         <div id="smoke-archive">
-            <h2>Prisirukei</h2>
+            <h2>Įrašų archyvas</h2>
             <div id="archive-list"></div>
         </div>
 
-        <!-- Word Frequency Counter Section -->
+        <!-- Žodžių dažnio skaičiavimas -->
         <div id="word-frequency">
-            <h2>Word Frequency Tracker</h2>
+            <h2>Žodžių dažnio skaičiavimas</h2>
             <div id="frequentWords"></div>
         </div>
 
-    </div> <!-- End of container -->
+        <!-- Kodo atvaizdavimo dalis -->
+        <div id="code-view">
+            <h2>HTML, CSS ir JS kodas</h2>
+            <pre id="html-code"></pre>
+            <pre id="css-code"></pre>
+            <pre id="js-code"></pre>
+        </div>
+
+        <!-- Analizės dalis -->
+        <div id="analysis">
+            <h2>Įrašų analizė</h2>
+            <button id="analysis-button">Atlikti analizę</button>
+            <div id="analysis-results"></div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
