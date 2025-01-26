@@ -54,76 +54,6 @@ header p {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-#new-session label {
-    font-size: 1.2em;
-    color: #333;
-    margin-bottom: 8px;
-    display: block;
-}
-
-#new-session input,
-#new-session textarea {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    font-size: 1em;
-    color: #333;
-}
-
-#new-session textarea {
-    height: 120px;
-    resize: vertical;
-}
-
-#track-smoke {
-    background-color: #4CAF50;
-    color: #fff;
-    padding: 15px 25px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1.1em;
-    transition: all 0.3s ease;
-}
-
-#track-smoke:hover {
-    background-color: #45a049;
-    transform: scale(1.05);
-}
-
-/* Archive Section */
-#smoke-archive {
-    margin-top: 40px;
-}
-
-#smoke-archive h2 {
-    font-size: 2em;
-    color: #fff;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.archive-item {
-    background-color: #fff;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.archive-item strong {
-    color: #2b2b2b;
-    font-size: 1.2em;
-}
-
-.archive-item em {
-    font-style: normal;
-    color: #555;
-}
-
 /* Word Frequency Section */
 #word-frequency {
     margin-top: 40px;
@@ -133,20 +63,22 @@ header p {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-#word-frequency h2 {
-    font-size: 1.8em;
-    color: #333;
-    text-align: center;
-    margin-bottom: 10px;
-}
-
 #frequentWords {
     font-size: 1.2em;
     color: #555;
     font-weight: bold;
 }
 
-/* Hover Effects for Archive Items */
+/* Archive Section */
+.archive-item {
+    background-color: #fff;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 .archive-item:hover {
     background-color: #f7f7f7;
     transform: translateY(-5px);
@@ -156,49 +88,3 @@ header p {
 /* Transitions */
 button, .archive-item {
     transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-/* Flexbox Layouts for better responsiveness */
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-#new-session, #smoke-archive, #word-frequency {
-    width: 100%;
-    max-width: 600px;
-    margin-bottom: 30px;
-}
-
-/* Styling for the word frequency counter */
-#frequentWords {
-    color: #2b2b2b;
-    font-weight: bold;
-    font-size: 1.2em;
-    line-height: 1.6;
-}
-
-/* Animations for the Background */
-@keyframes movingBackground {
-    0% { background-position: 0 0; }
-    100% { background-position: 100% 0; }
-}
-
-body {
-    animation: movingBackground 20s linear infinite;
-}
-
-/* Smoky Jungle Look */
-.container {
-    background-image: url('https://path-to-your-image.com/jungle-background.jpg');
-    background-size: cover;
-    background-position: center;
-}
-
-/* Add a soft shadow to the body for a more refined look */
-body {
-    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3);
-}
-
